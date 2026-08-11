@@ -1,0 +1,32 @@
+{
+  "name": "full-stack-backend-application",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/fahadmb123/full-stack-backend-application#readme",
+  "bugs": {
+    "url": "https://github.com/fahadmb123/full-stack-backend-application/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fahadmb123/full-stack-backend-application.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.2.0",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^7.0.2"
+  }
+}
