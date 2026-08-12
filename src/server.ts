@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { app } from "./app";
 import { MongoDatabase } from "./config/mongo";
-import { MySQLDatabase } from "./config/mySql";
+import { MySQLDatabase } from "./config/mysql";
 
 const PORT = process.env.PORT
 
