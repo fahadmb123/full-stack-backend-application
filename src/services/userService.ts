@@ -8,10 +8,13 @@ export class UserService implements IUserService{
 
     async register(user:IRegisterUser):Promise<boolean>{
         try {
+            const isExist = await this.sqlRepository.findByEmail(user.email)
+            if (isExist) {
+                throw new Error("The user with email already exist")
+            }
             await this.sqlRepository.create(user)
             const data = await this.sqlRepository.findByEmail(user.email)
             await this.mongoRepository.create(data)
-            console.log("Created BOTH DBS")
             return true
         } catch (err) {
             throw(err)
