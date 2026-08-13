@@ -1,13 +1,11 @@
 import express from "express"
+import { userController } from "../container"
 const router = express.Router()
 
 
 
 
-router.get("/register",(req,res)=>{
-    console.log("Hey yooo")
-    res.send("Hey Dominic")
-})
+router.post("/register",userController.register)
 
 
 export default router
