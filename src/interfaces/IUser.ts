@@ -1,4 +1,4 @@
-type UserType = "admin" | "user"
+type UserRoleTypes = "admin" | "user"
 
 
 export interface IUser {
@@ -6,10 +6,10 @@ export interface IUser {
     name:string,
     email:string,
     password:string,
-    role:UserType
+    role:UserRoleTypes
 }
 
 export interface IRegisterUser extends Omit<IUser, "role" | "id"> {
-    role?: UserType,
+    role?: UserRoleTypes,
     id?:string
 }
