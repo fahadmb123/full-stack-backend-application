@@ -1,5 +1,9 @@
-import { IRegisterUser } from "./IUser";
+import { IRegisterUser, IUser } from "./IUser";
 
-export interface IUserRepository {
+export interface IUserMongoRepository {
+    create(user:IUser):Promise<boolean>
+}
+export interface IUserSqlRepository {
     create(user:IRegisterUser):Promise<boolean>
+        findByEmail(email:string):Promise<IUser>
 }

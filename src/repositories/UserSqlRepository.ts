@@ -1,45 +1,51 @@
 import { IRegisterUser, IUser } from "../interfaces/IUser";
 import { BaseRepository } from "./BaseRepository";
-import { IUserRepository } from "../interfaces/IUserRepository";
+import { IUserSqlRepository } from "../interfaces/IUserRepository";
 import { MySQLDatabase } from "../config/mysql";
 import { UserModel } from "../models/userModel";
+import { Pool } from "mysql2/promise";
 
-export class UserRepository extends BaseRepository<IRegisterUser> implements IUserRepository{
+export class UserSqlRepository extends BaseRepository<IRegisterUser> implements IUserSqlRepository{
+
+    private mysqlPool : Pool
+
     constructor (private db:MySQLDatabase) {
         super()
+        this.mysqlPool = db.getPool()
     }
     async create(user:IRegisterUser):Promise<boolean>{
         try {
-            const mysqlPool = this.db.getPool()
-            let query = `
+            const query = `
                 INSERT INTO users (name, email, password)
                 VALUES (?, ?, ?)`;
 
-            await mysqlPool.execute(query, [
+            await this.mysqlPool.execute(query, [
                 user.name,
                 user.email,
                 user.password
             ])
-            query = `
-                SELECT * FROM users
-                WHERE email = ?`;
-
-            const [rows]  = await mysqlPool.execute(query,[user.email])
-            const users = rows as IUser[]
-            const data = users.find((val)=>{
-                return val.email === user.email
-            })
-            const newMongoUser = new UserModel ({
-                userId:data?.id,
-                name:data?.name,
-                email:data?.email,
-                password:data?.password,
-                role:data?.role
-            })
-            await newMongoUser.save()
+            
+            
             return true
         } catch (err) {
             throw(err)
+        }
+    }
+
+    async findByEmail(email:string):Promise<IUser> {
+        try {
+            const query = `
+                SELECT * FROM users
+                WHERE email = ?`;
+
+            const [rows]  = await this.mysqlPool.execute(query,[email])
+            const users = rows as IUser[]
+            const data = users.find((val)=>{
+                return val.email === email
+            })
+            return data as IUser
+        } catch (err) {
+            throw (err)
         }
     }
 }
