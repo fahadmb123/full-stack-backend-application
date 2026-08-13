@@ -1,3 +1,5 @@
+import { IRegisterUser } from "./IUser";
+
 export interface IUserService {
-    register <T>(user:T):Promise<void>
+    register (user:IRegisterUser):Promise<void>
 }
