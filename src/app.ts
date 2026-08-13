@@ -1,5 +1,6 @@
 import express from "express"
 import userRoute from "./routes/userRoutes"
+import errorMiddleware from "./middleware/errorMiddleware";
 const app = express();
 
 
@@ -12,5 +13,5 @@ app.use(express.json())
 
 app.use("/api/auth",userRoute)
 
-
+app.use(errorMiddleware)
 export {app}

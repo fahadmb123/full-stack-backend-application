@@ -16,7 +16,7 @@ export class UserController {
                 message: "User registered successfully"
             });
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     }
 }
