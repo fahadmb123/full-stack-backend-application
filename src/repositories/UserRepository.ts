@@ -1,8 +1,24 @@
-import { IUser } from "../interfaces/IUser";
+import { IRegisterUser } from "../interfaces/IUser";
 import { BaseRepository } from "./BaseRepository";
+import { IUserRepository } from "../interfaces/IUserRepository";
+import { MySQLDatabase } from "../config/mysql";
 
-export class UserRepository extends BaseRepository<IUser>{
-    async create(data:IUser):Promise<boolean>{
+
+export class UserRepository extends BaseRepository<IRegisterUser> implements IUserRepository{
+    constructor (private db:MySQLDatabase) {
+        super()
+    }
+    async create(user:IRegisterUser):Promise<boolean>{
+        const mysqlPool = this.db.getPool()
+        const query = `
+            INSERT INTO users (name, email, password)
+            VALUES (?, ?, ?)
+        `;
+        await mysqlPool.execute(query, [
+            user.name,
+            user.email,
+            user.password
+        ]);
         return true
     }
 }
