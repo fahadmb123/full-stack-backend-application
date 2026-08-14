@@ -1,7 +1,6 @@
-import { IUserPartialed, IUser } from "../interfaces/IUser";
+import { IUserPartialed, IUser } from "../interfaces/User/IUser";
 import { BaseRepository } from "./BaseRepository";
-import { IUserMongoRepository } from "../interfaces/IUserRepository";
-import { MySQLDatabase } from "../config/mysql";
+import { IUserMongoRepository } from "../interfaces/User/IUserRepository";
 import { UserModel } from "../models/userModel";
 
 
@@ -18,6 +17,15 @@ export class UserMongoRepository extends BaseRepository<IUserPartialed> implemen
             })
             await newMongoUser.save()
             return true
+        } catch (err) {
+            throw(err)
+        }
+    }
+
+    async getAllUsers():Promise<IUser[]>{
+        try {
+            const data = await UserModel.find()
+            return data
         } catch (err) {
             throw(err)
         }

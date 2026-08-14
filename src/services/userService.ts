@@ -1,7 +1,7 @@
 import { AppError } from "../errors/AppError";
-import { IUserPartialed } from "../interfaces/IUser";
-import { IUserMongoRepository, IUserSqlRepository } from "../interfaces/IUserRepository";
-import { IServiceReturn, IUserService } from "../interfaces/IUserService";
+import { IUserPartialed } from "../interfaces/User/IUser";
+import { IUserMongoRepository, IUserSqlRepository } from "../interfaces/User/IUserRepository";
+import { IServiceReturn, IUserService } from "../interfaces/User/IUserService";
 import { generateToken } from "../utils/jwt";
 import bcrypt from "bcrypt"
 const salt = 10

@@ -1,6 +1,6 @@
-import { IUserPartialed, IUser } from "../interfaces/IUser";
+import { IUserPartialed, IUser } from "../interfaces/User/IUser";
 import { BaseRepository } from "./BaseRepository";
-import { IUserSqlRepository } from "../interfaces/IUserRepository";
+import { IUserSqlRepository } from "../interfaces/User/IUserRepository";
 import { MySQLDatabase } from "../config/mysql";
 import { Pool } from "mysql2/promise";
 
