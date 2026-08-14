@@ -1,11 +1,10 @@
-import { IRegisterUser, IUser } from "../interfaces/IUser";
+import { IUserPartialed, IUser } from "../interfaces/IUser";
 import { BaseRepository } from "./BaseRepository";
 import { IUserSqlRepository } from "../interfaces/IUserRepository";
 import { MySQLDatabase } from "../config/mysql";
-import { UserModel } from "../models/userModel";
 import { Pool } from "mysql2/promise";
 
-export class UserSqlRepository extends BaseRepository<IRegisterUser> implements IUserSqlRepository{
+export class UserSqlRepository extends BaseRepository<IUserPartialed> implements IUserSqlRepository{
 
     private mysqlPool : Pool
 
@@ -13,7 +12,7 @@ export class UserSqlRepository extends BaseRepository<IRegisterUser> implements 
         super()
         this.mysqlPool = db.getPool()
     }
-    async create(user:IRegisterUser):Promise<boolean>{
+    async create(user:IUserPartialed):Promise<boolean>{
         try {
             const query = `
                 INSERT INTO users (name, email, password)
@@ -23,7 +22,7 @@ export class UserSqlRepository extends BaseRepository<IRegisterUser> implements 
                 user.name,
                 user.email,
                 user.password
-            ])
+            ] as string[])
             
             
             return true

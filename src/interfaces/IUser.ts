@@ -9,7 +9,4 @@ export interface IUser {
     role:UserRoleTypes
 }
 
-export interface IRegisterUser extends Omit<IUser, "role" | "id"> {
-    role?: UserRoleTypes,
-    id?:string
-}
+export type IUserPartialed  = Partial<IUser>
