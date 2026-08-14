@@ -1,7 +1,8 @@
 import { IUserPartialed } from "./IUser";
 
-export interface IUserService <T>{
-    register (user:IUserPartialed):Promise<IServiceReturn<T>>
+export interface IUserService <>{
+    register (user:IUserPartialed):Promise<IServiceReturn<IUserPartialed>>
+    login (user:IUserPartialed):Promise<IServiceReturn<string>>
 }
 
 

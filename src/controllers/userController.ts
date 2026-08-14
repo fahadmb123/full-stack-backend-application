@@ -6,7 +6,7 @@ import { IUserPartialed } from "../interfaces/IUser";
 
 export class UserController {
 
-    constructor(private userService:IUserService<IUserPartialed>) {}
+    constructor(private userService:IUserService) {}
 
     register = async (req: Request,res: Response,next: NextFunction): Promise<void> =>{
         try {            
@@ -20,12 +20,15 @@ export class UserController {
 
     login = async (req: Request,res: Response,next: NextFunction): Promise<void> =>{
         try {            
-            await this.userService.register(req.body);
+            const result = await this.userService.login(req.body)
 
-            res.status(201).json({
-                success : true,
-                message: "User registered successfully"
-            });
+            res.cookie("token", result.data, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: "lax",
+                maxAge: 7 * 24 * 60 * 60 * 1000
+            })
+            res.status(201).json(result)
         } catch (error) {
             next(error)
         }

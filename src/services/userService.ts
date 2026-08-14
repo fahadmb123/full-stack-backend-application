@@ -2,10 +2,11 @@ import { IUserPartialed } from "../interfaces/IUser";
 import { IUserMongoRepository, IUserSqlRepository } from "../interfaces/IUserRepository";
 import { IServiceReturn, IUserService } from "../interfaces/IUserService";
 import bcrypt from "bcrypt"
+import { generateToken } from "../utils/jwt";
 const salt = 10
 
 
-export class UserService implements IUserService<IUserPartialed>{
+export class UserService implements IUserService{
 
     constructor(private mongoRepository:IUserMongoRepository,private sqlRepository:IUserSqlRepository){}
 
@@ -30,7 +31,7 @@ export class UserService implements IUserService<IUserPartialed>{
         }
     }
 
-    async login(user:IUserPartialed):Promise<IServiceReturn<IUserPartialed>>{
+    async login(user:IUserPartialed):Promise<IServiceReturn<string>>{
         try {
             const isExist = await this.sqlRepository.findByEmail(user.email!)
 
@@ -39,11 +40,15 @@ export class UserService implements IUserService<IUserPartialed>{
             const isMatch = await bcrypt.compare(user.password!,isExist.password)
 
             if (!isMatch) throw new Error("Password not matching")
-
+            
+            const token = generateToken(
+                Number(isExist.id),
+                isExist.role
+            )
             return {
                 success : true,
                 message : "Logged In Successfully",
-                data:{}
+                data:token
             }
         } catch (err) {
             throw(err)
