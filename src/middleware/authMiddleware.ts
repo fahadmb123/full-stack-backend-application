@@ -11,7 +11,8 @@ export const authMiddleware = (req: Request,res: Response,next: NextFunction): v
             })
             return
         }
-        verifyToken(token)
+        const decoded = verifyToken(token)
+        req.user = decoded
         next()
     } catch (error) {
         res.status(401).json({
