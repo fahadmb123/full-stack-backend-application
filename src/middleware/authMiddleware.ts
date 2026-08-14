@@ -19,11 +19,9 @@ export const authMiddleware = (
             return;
         }
 
-        const decoded = verifyToken(token);
+        verifyToken(token)
 
-        req.user = decoded;
-
-        next();
+        next()
 
     } catch (error) {
 
