@@ -1,13 +1,13 @@
 import express from "express"
 import { userController } from "../container"
-import { authMiddleware } from "../middleware/authMiddleware"
+import { authMiddleware,guestMiddleware } from "../middleware/authMiddleware"
 const router = express.Router()
 
 
 
 
-router.post("/register",userController.register)
-router.post("/login",userController.login)
+router.post("/register",guestMiddleware,userController.register)
+router.post("/login",guestMiddleware,userController.login)
 
 
 router.get("/products",authMiddleware,userController.products)
