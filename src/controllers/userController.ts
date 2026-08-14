@@ -27,7 +27,7 @@ export class UserController {
                 sameSite: "lax",
                 maxAge: 7 * 24 * 60 * 60 * 1000
             })
-            res.status(201).json(result)
+            res.status(200).json(result)
         } catch (error) {
             next(error)
         }
