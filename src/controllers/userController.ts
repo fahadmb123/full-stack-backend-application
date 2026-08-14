@@ -34,9 +34,5 @@ export class UserController {
     }
     products = async (req: Request,res: Response,next: NextFunction): Promise<void> =>{
         res.send("This is productsssssss ")
-        res.status(201).json({
-            success : true,
-            message:"We have some products"
-        })
     }
 }

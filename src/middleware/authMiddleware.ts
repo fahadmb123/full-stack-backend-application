@@ -12,11 +12,12 @@ export const authMiddleware = (req: Request,res: Response,next: NextFunction): v
             return
         }
         verifyToken(token)
-        return 
+        next()
     } catch (error) {
         res.status(401).json({
             success: false,
             message: "Invalid or expired token"
         })
+        return
     }
 };
