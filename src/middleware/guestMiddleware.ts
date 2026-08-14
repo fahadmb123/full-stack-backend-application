@@ -1,11 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt";
 
-export const guestMiddleware = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-): void => {
+export const guestMiddleware = (req: Request,res: Response,next: NextFunction): void => {
     try {
         const token = req.cookies.token
         if (!token) {
