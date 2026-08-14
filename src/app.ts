@@ -1,12 +1,9 @@
 import express from "express"
 import userRoute from "./routes/userRoutes"
-<<<<<<< HEAD
 import cookieParser from "cookie-parser";
-
-=======
 import adminRoute from "./routes/adminRoutes"
 import errorMiddleware from "./middleware/errorMiddleware";
->>>>>>> main
+
 const app = express();
 
 
