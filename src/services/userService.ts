@@ -1,6 +1,9 @@
 import { IRegisterUser } from "../interfaces/IUser";
 import { IUserMongoRepository, IUserSqlRepository } from "../interfaces/IUserRepository";
 import { IUserService } from "../interfaces/IUserService";
+import bcrypt from "bcrypt"
+const salt = 10
+
 
 export class UserService implements IUserService{
 
@@ -12,6 +15,8 @@ export class UserService implements IUserService{
             if (isExist) {
                 throw new Error("The user with email already exist")
             }
+            const hasPass = await bcrypt.hash(user.password,salt)
+            user.password = hasPass
             await this.sqlRepository.create(user)
             const data = await this.sqlRepository.findByEmail(user.email)
             await this.mongoRepository.create(data)
