@@ -46,7 +46,7 @@ export class UserMongoRepository extends BaseRepository<IUserPartialed> implemen
 
     async findById(userId:number):Promise<IUser> {
         try {
-            return await UserModel.findOne({userId})
+            return await UserModel.findOne({userId}) as IUser
         } catch (err) {
             throw (err)
         }
