@@ -41,4 +41,25 @@ export class AdminService implements IAdminService{
             throw(err)
         }
     }
+
+    async createUser(user:IUserPartialed):Promise<IServiceReturn<IUserPartialed>>{
+            try {
+                const isExist = await this.sqlRepository.findByEmail(user.email!)
+                if (isExist) throw new AppError(409,"User with email already exist")
+      
+                const hasPass = await bcrypt.hash(user.password!,salt)
+                user.password = hasPass
+                await this.sqlRepository.create(user)
+                const data = await this.sqlRepository.findByEmail(user.email!)
+                await this.mongoRepository.create(data)
+                return {
+                    success : true,
+                    message:"Acount registered Successfully",
+                    data
+                }
+            } catch (err) {
+                throw(err)
+            }
+        }
+    
 }

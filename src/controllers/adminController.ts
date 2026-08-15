@@ -22,4 +22,13 @@ export class AdminController {
             next(err)
         }
     }
+
+    createUser = async (req:Request,res:Response,next:NextFunction)=>{
+        try {            
+            const result = await this.adminService.createUser(req.body)
+            res.status(201).json(result);
+        } catch (error) {
+            next(error)
+        }
+    }
 }
