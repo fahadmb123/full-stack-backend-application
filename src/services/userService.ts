@@ -39,7 +39,7 @@ export class UserService implements IUserService{
 
             const isMatch = await bcrypt.compare(user.password!,isExist.password)
 
-            if (!isMatch) throw new AppError(401,"Password not matching")
+            if (!isMatch) throw new AppError(401,"Incorrect Password")
             
             const token = generateToken(
                 Number(isExist.id),
