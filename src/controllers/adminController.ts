@@ -31,4 +31,14 @@ export class AdminController {
             next(error)
         }
     }
+
+    getUser = async (req:Request,res:Response,next:NextFunction)=>{
+        try {
+            const id = req.params.id     
+            const result = await this.adminService.getUser(Number(id))
+            res.status(201).json(result);
+        } catch (error) {
+            next(error)
+        }
+    }
 }

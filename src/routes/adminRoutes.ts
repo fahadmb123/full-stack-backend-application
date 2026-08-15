@@ -10,7 +10,9 @@ const router = express.Router()
 
 router.get("/users",authMiddleware,roleMiddleware(["admin"]),adminController.getAllUsers)
 router.post("/users",authMiddleware,roleMiddleware(["admin"]),validate(adminCreateUserSchema),adminController.createUser)
+router.get("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.getUser)
 router.patch("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.updateUser)
+
 
 
 
