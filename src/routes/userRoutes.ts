@@ -13,7 +13,7 @@ router.post("/register",validate(registerSchema),guestMiddleware,userController.
 router.post("/login",validate(loginSchema),guestMiddleware,userController.login)
 
 
-router.get("/products",authMiddleware,roleMiddleware(["user"]),userController.products)
+router.get("/profile",authMiddleware,roleMiddleware(["user"]),userController.profile)
 
 
 export default router

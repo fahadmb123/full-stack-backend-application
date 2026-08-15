@@ -32,7 +32,7 @@ export class UserController {
             next(error)
         }
     }
-    products = async (req: Request,res: Response,next: NextFunction): Promise<void> =>{
-        res.send("This is productsssssss ")
+    profile = async (req: Request,res: Response,next: NextFunction): Promise<void> =>{
+        res.send("This is Profileeeee  ")
     }
 }
