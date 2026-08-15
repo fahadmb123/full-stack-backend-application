@@ -1,9 +1,11 @@
 import express from "express"
+import validate from "../middleware/validate"
 import { adminController } from "../container"
 import { authMiddleware } from "../middleware/authMiddleware"
 import { roleMiddleware } from "../middleware/roleMiddleware"
-import validate from "../middleware/validate"
 import { adminCreateUserSchema } from "../schemas/auth.schema"
+
+
 
 const router = express.Router()
 
