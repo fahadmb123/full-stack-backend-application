@@ -3,8 +3,10 @@ import { IUserPartialed, IUser } from "./IUser";
 export interface IUserMongoRepository {
     create(user:IUser):Promise<boolean>
     getAllUsers():Promise<IUser[]>
+    update(userId:number,data:IUserPartialed):Promise<IUser>
 }
 export interface IUserSqlRepository {
     create(user:IUserPartialed):Promise<boolean>
-        findByEmail(email:string):Promise<IUser>
+    findByEmail(email:string):Promise<IUser>
+    update(userId:number,data:IUserPartialed):Promise<void>
 }

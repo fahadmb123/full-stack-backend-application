@@ -12,4 +12,14 @@ export class AdminController {
             next(err)
         }
     }
+
+    updateUser = async (req:Request,res:Response,next:NextFunction)=>{
+        try{
+            const id = req.params.id
+            const result = await this.adminService.update(Number(id),req.body)
+            res.status(200).json(result)
+        }catch (err) {
+            next(err)
+        }
+    }
 }

@@ -13,7 +13,7 @@ const sqlRepository = new UserSqlRepository(mysql)
 const mongoRepository = new UserMongoRepository()
 
 const userService = new UserService(mongoRepository,sqlRepository)
-const adminService = new AdminService(mongoRepository)
+const adminService = new AdminService(mongoRepository,sqlRepository)
 
 
 export const userController = new UserController(userService)

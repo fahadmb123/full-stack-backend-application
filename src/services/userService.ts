@@ -14,9 +14,8 @@ export class UserService implements IUserService{
     async register(user:IUserPartialed):Promise<IServiceReturn<IUserPartialed>>{
         try {
             const isExist = await this.sqlRepository.findByEmail(user.email!)
-            if (isExist) {
-                throw new AppError(409,"User with email already exist")
-            }
+            if (isExist) throw new AppError(409,"User with email already exist")
+  
             const hasPass = await bcrypt.hash(user.password!,salt)
             user.password = hasPass
             await this.sqlRepository.create(user)

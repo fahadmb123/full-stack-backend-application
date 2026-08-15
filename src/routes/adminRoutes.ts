@@ -6,6 +6,8 @@ const router = express.Router()
 
 
 router.get("/users",authMiddleware,roleMiddleware(["admin"]),adminController.getAllUsers)
+router.patch("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.updateUser)
+
 
 
 export default router

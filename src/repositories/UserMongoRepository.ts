@@ -30,4 +30,17 @@ export class UserMongoRepository extends BaseRepository<IUserPartialed> implemen
             throw(err)
         }
     }
+
+    async update(userId:number,data:IUserPartialed):Promise<IUser> {
+        try {
+            const updatedUser = await UserModel.findOneAndUpdate(
+                { userId },
+                { $set: data },
+                { new: true }
+            )
+            return updatedUser as IUser
+        } catch (err) {
+            throw (err)
+        }
+    }
 }
