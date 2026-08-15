@@ -36,7 +36,7 @@ export class UserMongoRepository extends BaseRepository<IUserPartialed> implemen
             const updatedUser = await UserModel.findOneAndUpdate(
                 { userId },
                 { $set: data },
-                { new: true }
+                { returnDocument: "after" }
             )
             return updatedUser as IUser
         } catch (err) {

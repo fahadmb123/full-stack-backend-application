@@ -24,8 +24,9 @@ export class AdminService implements IAdminService{
 
     async update(userId:number,data:IUserPartialed): Promise<IServiceReturn<IUser>>{
         try {
+            const oldUser = await this.mongoRepository.findById(userId)
             const isExist = await this.sqlRepository.findByEmail(data.email!)
-            if (isExist) throw new AppError(409,"User with email already exist")
+            if (isExist && oldUser.email !== data.email) throw new AppError(409,"User with email already exist")
 
             const hasPass = await bcrypt.hash(data.password!,salt)
             data.password = hasPass
