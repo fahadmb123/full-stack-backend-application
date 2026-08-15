@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response} from "express";
 import { IAdminService } from "../interfaces/Admin/IAdminService";
+import { success } from "zod";
 
 export class AdminController {
     constructor (private adminService : IAdminService){}
@@ -37,6 +38,19 @@ export class AdminController {
             const id = req.params.id     
             const result = await this.adminService.getUser(Number(id))
             res.status(201).json(result);
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    deleteUser = async (req:Request,res:Response,next:NextFunction)=>{
+        try {
+            const id = req.params.id     
+            await this.adminService.deleteUser(Number(id))
+            res.status(201).json({
+                success : true,
+                message : "User Deleted"
+            });
         } catch (error) {
             next(error)
         }

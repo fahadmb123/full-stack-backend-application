@@ -6,4 +6,5 @@ export interface IAdminService {
     update(userId:number,data:IUserPartialed):Promise<IServiceReturn<IUser>>
     createUser (user:IUserPartialed):Promise<IServiceReturn<IUserPartialed>>
     getUser (userId:number):Promise<IServiceReturn<IUser>>
+    deleteUser(userId:number):Promise<void>
 }

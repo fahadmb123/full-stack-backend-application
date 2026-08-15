@@ -12,6 +12,7 @@ router.get("/users",authMiddleware,roleMiddleware(["admin"]),adminController.get
 router.post("/users",authMiddleware,roleMiddleware(["admin"]),validate(adminCreateUserSchema),adminController.createUser)
 router.get("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.getUser)
 router.patch("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.updateUser)
+router.delete("/users/:id",authMiddleware,roleMiddleware(["admin"]),adminController.deleteUser)
 
 
 

@@ -5,9 +5,11 @@ export interface IUserMongoRepository {
     getAllUsers():Promise<IUser[]>
     update(userId:number,data:IUserPartialed):Promise<IUser>
     findById(userId:number):Promise<IUser>
+    delete(userId:number):Promise<void>
 }
 export interface IUserSqlRepository {
     create(user:IUserPartialed):Promise<boolean>
     findByEmail(email:string):Promise<IUser>
     update(userId:number,data:IUserPartialed):Promise<void>
+    delete(userId:number):Promise<void>
 }

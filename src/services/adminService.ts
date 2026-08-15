@@ -81,5 +81,16 @@ export class AdminService implements IAdminService{
             throw(err)
         }
     }
+
+    async deleteUser(userId:number):Promise<void>{
+        try {
+            const user = await this.mongoRepository.findById(userId)
+            if (!user) throw new AppError(404,"User Doesn't Exist")
+            await this.sqlRepository.delete(userId)
+            await this.mongoRepository.delete(userId)
+        } catch (err) {
+            throw(err)
+        }
+    }
     
 }

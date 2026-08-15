@@ -72,7 +72,19 @@ export class UserSqlRepository extends BaseRepository<IUserPartialed> implements
                 WHERE id = ?
             `;
 
-            await this.db.getPool().execute(query, values)
+            await this.mysqlPool.execute(query, values)
+        } catch (err) {
+            throw (err)
+        }
+    }
+
+    async delete(userId:number):Promise<void> {
+        try {
+            const query = `
+            DELETE FROM users
+            WHERE id = ?
+            `
+            await this.mysqlPool.execute(query,[userId])
         } catch (err) {
             throw (err)
         }

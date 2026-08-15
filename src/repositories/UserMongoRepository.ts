@@ -51,4 +51,12 @@ export class UserMongoRepository extends BaseRepository<IUserPartialed> implemen
             throw (err)
         }
     }
+
+    async delete(userId:number):Promise<void> {
+        try {
+            await UserModel.deleteOne({userId})
+        } catch (err) {
+            throw (err)
+        }
+    }
 }
