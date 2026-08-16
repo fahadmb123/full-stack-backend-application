@@ -13,7 +13,7 @@ dns.setServers(["8.8.8.8", "8.8.4.4"])
 
 
 app.use(express.json())
-app.use(cookieParser());
+app.use(cookieParser()); 
 
 app.use("/api/auth",userRoute)
 app.use("/api/admin",adminRoute)
